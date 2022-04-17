@@ -5,7 +5,7 @@ terraform {
       source = "hashicorp/aws"
       Version = "~>3.27"
     }
-	
+  }	
   required_version = ">= 0.13"
 	  
   backend "s3" {
