@@ -1,12 +1,26 @@
 terraform {
+	
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+      version = "~>4.10"
+    }
+  }	
   required_version = ">= 0.13"
+	  
   backend "s3" {
     profile        = "Final-Demo"
     region         = "us-east-1"
     key            = "terraform.tfstate"
-    bucket         = "final-demo-jctbucket-18"
+    bucket         = "final-demo-jctbucket-20"
     dynamodb_table = "finaldemo-dynamodb-lock"
   }
+}
+
+provider "aws" {
+  region  = "us-east-1"
+  access_key = "AKIA2LV4KIQL7TAIPM4E"
+  secret_key = "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"
 }
 
 # VPC *********************************************************************************************
