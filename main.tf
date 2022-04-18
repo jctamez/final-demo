@@ -589,22 +589,12 @@ resource "local_file" "TF-key" {
 }
 
 # Saving Key Pair for ssh login for Client if needed
-#resource "null_resource" "save_key_pair"  {
-#provisioner "local-exec" {
-#command = "echo  ${tls_private_key.rsa.private_key_pem} > mykey.pem"
-#}
-#}
+resource "null_resource" "save_key_pair"  {
+    provisioner "local-exec" {
+    command = "echo  ${tls_private_key.rsa.private_key_pem} > mykey.pem"
+    }
+}
 # KEY PAIR ****************************************************************************************
-
-
-# OUTPUT ******************************************************************************************
-
-#output "lb_dns_name" {
-#  description = "The DNS name of the load balancer"
-#  value       = aws_lb.app-lb.dns_name
-#}
-
-# OUTPUT ******************************************************************************************
 
 
 # AUTOSCALING *************************************************************************************
@@ -616,7 +606,6 @@ resource "aws_launch_template" "demo-lt" {
   instance_type 			= "t2.micro"
   key_name 					= "TF_key"
   vpc_security_group_ids 	= [aws_security_group.web-sg.id]
-# user_data					= 
   user_data              	= data.template_cloudinit_config.config.rendered
 }
 
@@ -634,8 +623,6 @@ resource "aws_autoscaling_group" "demo-asg" {
   health_check_grace_period 	= 300
   health_check_type         	= "ELB"
   target_group_arns				= ["${aws_lb_target_group.app-wordpress-lb.arn}"]
-#  load_balancers 				= ["${aws_lb.app-wordpress-lb.id}"]
-# load_balancers 				= ["${aws_lb.app-wordpress-lb.name}"]
 
   launch_template {
 	id      					= aws_launch_template.demo-lt.id
