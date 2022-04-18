@@ -26,7 +26,7 @@ jobs:
 
       - name: Terraform Init
         id: init
-        run: terraform init -backend-config="access_key=AKIAU4IYCRAHFOXIOZK4" -backend-config="secret_key=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"
+        run: terraform init -backend-config="access_key=AKIAQDRNQ5OB5LDFS5VV" -backend-config="secret_key=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"
 
       - name: Terraform Destroy
         run: terraform destroy -auto-approve
