@@ -1,22 +1,32 @@
-name: terraform destroy workload
+name: terraform destroy
 on:
   workflow_dispatch:
       inputs:
       env:
         description: 'main'
         required: true
-        default: 'main'    
-
+        default: 'main' 
 jobs:
-  destroy_workspace:
+  terraform:
+    name: "Terraform"
     runs-on: ubuntu-latest
-    name: Destroy terraform workspace
+    env:	
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRETE_ID }}
+      AWS_REGION: 'us-east-1'
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: terraform destroy
-        uses: dflook/terraform-destroy@v1
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
         with:
-          path: my-terraform-config
-          workspace: ${{ github.head_ref }}
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+      - name: Terraform Init
+        id: init
+        run: terraform init -backend-config="access_key=AKIA2LV4KIQL7TAIPM4E" -backend-config="secret_key=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"
+
+      - name: Terraform Destroy
+        run: terraform destroy -auto-approve
