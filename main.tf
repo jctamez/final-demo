@@ -12,15 +12,15 @@ terraform {
     profile        = "Final-Demo"
     region         = "us-east-1"
     key            = "terraform.tfstate"
-    bucket         = "final-demo-jctbucket-20"
+    bucket         = "final-demo-jctbucket-21"
     dynamodb_table = "finaldemo-dynamodb-lock"
   }
 }
 
 provider "aws" {
   region  = "us-east-1"
-  access_key = "AKIA2LV4KIQL7TAIPM4E"
-  secret_key = "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"
+  access_key = "AKIAU4IYCRAHFOXIOZK4"
+  secret_key = "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"
 }
 
 # VPC *********************************************************************************************
