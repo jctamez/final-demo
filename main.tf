@@ -393,7 +393,7 @@ ingress {
   }
  
   tags = {
-    Name = "Web-SG"
+    Name = "SG - Web Server Network"
   }
 }
 
