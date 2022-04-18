@@ -215,7 +215,6 @@ resource "aws_route_table_association" "f" {
 # ROUTE TABLES ************************************************************************************
 
 
-
 # EC2 INSTANCES ***********************************************************************************
 
 # jumpbox (bastion)-1a - EC2 Instance -------------------------------------------------------------
@@ -249,8 +248,6 @@ resource "aws_instance" "jumpbox1b" {
 }
 
 # EC2 INSTANCES ***********************************************************************************
-
-
 
 
 # MOUNT EFS, INSTALL WORDPRESS, SETUP WORDPRESS ***************************************************
@@ -307,10 +304,6 @@ data "template_cloudinit_config" "config" {
   }
 }
 # MOUNT EFS, INSTALL WORDPRESS, SETUP WORDPRESS ***************************************************
-
-
-
-
 
 
 # SECURITY GROUPS *********************************************************************************
@@ -404,49 +397,48 @@ ingress {
   }
 }
 
-# Web Server Security Group -----------------------------------------------------------------------
-# Create Web Server Security Group
-resource "aws_security_group" "webserver-sg" {
-  name        = "Webserver-SG"
-  description = "Allow inbound traffic from ALB"
-  vpc_id      = aws_vpc.my-vpc.id
+## Web Server Security Group -----------------------------------------------------------------------
+## Create Web Server Security Group
+#resource "aws_security_group" "webserver-sg" {
+#  name        = "Webserver-SG"
+#  description = "Allow inbound traffic from ALB"
+#  vpc_id      = aws_vpc.my-vpc.id
 
-  ingress {
-    description     = "Allow traffic from web layer"
-    from_port       = 80
-    to_port         = 80
-    protocol        = "tcp"
-    security_groups = [aws_security_group.web-sg.id]
-  }
+#  ingress {
+#    description     = "Allow traffic from web layer"
+#    from_port       = 80
+#    to_port         = 80
+#    protocol        = "tcp"
+#    security_groups = [aws_security_group.web-sg.id]
+#  }
 
-  ingress {
-    description     = "Allow traffic from SSH"
-    from_port       = 22
-    to_port         = 22
-    protocol        = "tcp"
-    security_groups = [aws_security_group.web-sg.id]
-  }
+#  ingress {
+#    description     = "Allow traffic from SSH"
+#    from_port       = 22
+#    to_port         = 22
+#    protocol        = "tcp"
+#    security_groups = [aws_security_group.web-sg.id]
+#  }
 
+#  ingress {
+#    description     = "Allow traffic from MySQL"
+#    from_port       = 3306
+#    to_port         = 3306
+#    protocol        = "tcp"
+#    security_groups = [aws_security_group.web-sg.id]
+#  }
 
-  ingress {
-    description     = "Allow traffic from MySQL"
-    from_port       = 3306
-    to_port         = 3306
-    protocol        = "tcp"
-    security_groups = [aws_security_group.web-sg.id]
-  }
+#  egress {
+#    from_port   = 0
+#    to_port     = 0
+#    protocol    = "-1"
+#    cidr_blocks = ["0.0.0.0/0"]
+#  }
 
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  tags = {
-    Name = "SG - Web Servers Network"
-  }
-}
+#  tags = {
+#    Name = "SG - Web Servers Network"
+#  }
+#}
 
 # Database Security Group -------------------------------------------------------------------------
 # Create Database Security Group
@@ -578,7 +570,6 @@ resource "aws_efs_mount_target" "mount" {
 # EFS ***************************************************************************************** End
 
 
-
 # KEY PAIR ****************************************************************************************
 # Generate new private key
 resource "tls_private_key" "rsa" {
@@ -614,7 +605,6 @@ resource "local_file" "TF-key" {
 #}
 
 # OUTPUT ******************************************************************************************
-
 
 
 # AUTOSCALING *************************************************************************************
@@ -734,7 +724,6 @@ resource "aws_cloudwatch_metric_alarm" "web_cpu_alarm_down" {
 }
 
 # AUTO SCALING POLICY -----------------------------------------------------------------------------
-
 
 
 # APPLICATION LOAD BALANCER ***********************************************************************
