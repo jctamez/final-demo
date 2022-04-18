@@ -12,7 +12,7 @@ terraform {
     profile        = "Final-Demo"
     region         = "us-east-1"
     key            = "terraform.tfstate"
-    bucket         = "final-demo-jctbucket-19"
+    bucket         = "final-demo-jctbucket-20"
     dynamodb_table = "finaldemo-dynamodb-lock"
   }
 }
