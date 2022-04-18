@@ -1,4 +1,4 @@
-name: Manually triggered terraform destroy workload
+name: terraform destroy workload
 on:
   workflow_dispatch:
       inputs:
@@ -20,9 +20,9 @@ jobs:
 #            AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 #            AWS_DEFAULT_REGION: ${{ secrets.REGION }}
 
-#        - name: Show Destroy plan
-#          run: terraform plan -destroy
-#          continue-on-error: true
+        - name: Show Destroy plan
+          run: terraform plan -destroy
+          continue-on-error: true
 
         - name: Destroy resources jobs
           id: destroy
