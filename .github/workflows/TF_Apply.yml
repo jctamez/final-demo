@@ -25,7 +25,7 @@ jobs:
 
       - name: Terraform Init
         id: init
-        run: terraform init
+        run: terraform init -backend-config="access_key=AKIA2LV4KIQL7TAIPM4E" -backend-config="secret_key=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"
 
       - name: Terraform Plan
         id: plan
