@@ -613,7 +613,7 @@ resource "aws_launch_template" "demo-lt" {
 # AUTO SCALING GROUP ------------------------------------------------------------------------------
 resource "aws_autoscaling_group" "demo-asg" {
 #  availability_zones 			= ["us-east-1a","us-east-1b"]
-  desired_capacity   			= 4
+  desired_capacity   			= 6
   max_size           			= 6
   min_size           			= 2
   vpc_zone_identifier       	= [
